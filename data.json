@@ -1,0 +1,32 @@
+{
+    "dataResources": [
+      {
+        "title": "FlexBox Froggy",
+        "link": "https://flexboxfroggy.com/",
+        "imagem": "https://flexboxfroggy.com/",
+        "preco": 400,
+        "numId": 0,
+        "description": "A game where you help Froggy and friends by writing CSS code!",
+        "tags": ["all", "css", "game"]
+      },
+      {
+        "title": "freeCodeCamp",
+        "link": "https://www.freecodecamp.org/",
+        "imagem": "https://flexboxfroggy.com/",
+        "preco": 200,
+        "numId": 1,
+        "description": "Learn to code at home. Build projects. Earn certifications.",
+        "tags": ["all", "html", "css", "js", "certification"]
+      },
+      {
+        "title": "State of JavaScript",
+        "link": "https://stateofjs.com/",
+        "imagem": "https://flexboxfroggy.com/",
+        "preco": 300,
+        "numId": 2,
+        "description": "Find out which libraries developers want to learn next, satisfaction ratings, and much more.",
+        "tags": ["all", "js", "survey"]
+      }
+    ]
+  }
+  

@@ -1,42 +1,45 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
-    <title>Comparacao</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <title>Comparacao</title>
 </head>
+
 <body>
+  <div class="tudo">
     <section class="btnContainer">
-        <button id="all" class="btnFilter">
-          Todos
-        </button>
-        <button id="html" class="btnFilter">
-          Mouses
-        </button>
-        <button id="css" class="btnFilter">
-          Teclados
-        </button>
-        <button id="js" class="btnFilter">
-          Mousepad
-        </button>
-      </section>
-  
-  <div id="alertBoxContainer" class="alert-box-container">
-    <div class="alert-content">
-      <h2>Epa </h2>
-      <p>Só pode comparar 3 itens por vez</p>
-      <button id="btnConfirma">OK</button>
+      <button id="all" class="btnFilter button-28 active">
+        Todos
+      </button>
+      <button id="html" class="btnFilter button-28">
+        Mouses
+      </button>
+      <button id="css" class="btnFilter button-28">
+        Teclados
+      </button>
+      <button id="js" class="btnFilter button-28">
+        Mousepad
+      </button>
+    </section>
+
+    <div id="alertBoxContainer" class="alert-box-container">
+      <div class="alert-content">
+        <h2>Epa </h2>
+        <p>Só pode comparar 3 itens por vez</p>
+        <button id="btnConfirma">OK</button>
+      </div>
     </div>
-  </div>
-  <section id="resourcesContainer" class="itensContainer">
-    
-    <!-- TEMPLATE recursos -->
-    <template>
-      <article id="resource" class="">
+    <section id="resourcesContainer" class="itensContainer">
+
+      <!-- TEMPLATE recursos -->
+      <template>
+        <article id="resource" class="">
           <div class="">
             <div class="">
-                <img id="imagem" src="" alt="" width="100" height="80">
+              <img id="imagem" src="" alt="">
             </div>
             <header class="">
               <h2>
@@ -47,26 +50,28 @@
             <p id="preco"></p>
             <p id="description"></p>
 
-            <button class="btnComparar">comparar</button>
+            <button class="btnComparar button-95">Comparar</button>
+            <button class="btnDesistir button-95">Desistir</button>
           </div>
         </article>
-    </template>
+      </template>
 
-  </section>
-  
-  <div id="compararBotoes">
-    <button id="btnCompararPrincipal" onclick="mostrarCards()">COMPARAR PRODUTOS</button>
-    <button id="btnResetComp" onclick="resetarComp()">Começar Denovo</button>
+    </section>
+
+    <div id="compararBotoes">
+      <button id="btnCompararPrincipal" class="button-87" onclick="mostrarCards()">COMPARAR PRODUTOS</button>
+      <button id="btnResetComp" class="button-87" onclick="resetarComp()">Começar Denovo</button>
+    </div>
+
+    <p id="testeCompararIds" class="testeIds">aa</p>
+
+    <section id="compararContainer" class="">
+
+    </section>
+
   </div>
- 
-  <p id="testeCompararIds" class="testeIds">aa</p> 
-
-  <section id="compararContainer" class="">
-
-  </section>
-
-
   <!--Mais um Template pros cards de comparacao-->
   <script src="main.js"></script>
 </body>
+
 </html>

@@ -31,9 +31,26 @@ const dataResources = [
    'numId': 2,
    'description': 'Find out which libraries developers want to learn next, satisfaction ratings, and much more.',
    'tags': ['all', 'js', 'survey']
-  }
+  },
+  {'title': 'Mais um pra lista',
+    'link': 'https://stateofjs.com/',
+    'imagem': 'https://flexboxfroggy.com/',
+    'preco': 700,
+    'numId': 3,
+    'description': 'Find out which libraries developers want to learn next.',
+    'tags': ['all', 'css', 'html']
+   }
 ]
-
+//primeiro ele remove de todos o active
+//e entao ele adiciona active somente pro que foi selecionado
+btnFilter.forEach(item => {
+  item.addEventListener('click', function () {
+      btnFilter.forEach(i => {
+          i.classList.remove('active');
+      })
+      item.classList.add('active');
+  })
+});
 //Encher a variavel de qual filtro clicou
 //e chamar pra atualizar os cards dependendo do filtro
 function fillResourcesContainer() {
@@ -41,6 +58,7 @@ function fillResourcesContainer() {
   clearContainer(resources);
   filterResources(category)
 }
+
 
 function clearContainer(container) {
   container.innerHTML = "";
@@ -74,7 +92,7 @@ function copyTemplateCard(resourceData) {
   title.href = resourceData.link;
 
   const preco = card.querySelector("#preco");
-  preco.innerText = resourceData.preco;
+  preco.innerText = `R$` + resourceData.preco;
 
   const description = card.querySelector("#description");
   description.innerText = resourceData.description;
@@ -82,6 +100,10 @@ function copyTemplateCard(resourceData) {
   const btnComparar = card.querySelector(".btnComparar");
   btnComparar.id = resourceData.numId;
   btnComparar.addEventListener("click", encherCompararContainer);
+
+  const btnDesistir = card.querySelector(".btnDesistir");
+  btnDesistir.id = btnComparar.id;
+  btnDesistir.addEventListener("click", desistirDoItem);
 
   return card;
 }
@@ -93,6 +115,7 @@ btnFilter.forEach(function(btn) {
 
 const compararContainer = document.querySelector("#compararContainer");
 const btnComparar = document.querySelectorAll(".btnComparar");
+const btnDesistir = document.querySelectorAll(".btnDesistir");
 const btnCompararPrincipal = document.querySelector("#btnCompararPrincipal");
 
 const alertBoxContainer = document.querySelector("#alertBoxContainer");
@@ -111,10 +134,15 @@ let opcoesComparar2 = [];
 let copiaCont = 0;
 let copiaVet = [];
 
+
+
+
 //Botao de comparar
 function encherCompararContainer(e) { 
   this.style.color = "red";
   opComp = this.id;
+  this.style.display = "none";
+  visibilizarDesistir(opComp);
   console.log(opComp);
   if(vetCont < 3)
   {
@@ -124,6 +152,40 @@ function encherCompararContainer(e) {
     mostrarAlert();
   }
 }
+
+function visibilizarDesistir(btnNum){
+  btnDesistir.forEach((item) => {
+    if(item.id == btnNum){
+      item.style.display = "block";
+    }
+  })
+}
+
+function tirarDesistir(btnNum){
+  btnDesistir.forEach((item) => {
+    if(item.id == btnNum){
+      item.style.display = "none";
+    }
+  })
+}
+
+function desistirDoItem(e){
+  this.style.display = "none";
+  opComp = this.id;
+  visibilizarComparar(opComp);
+  vetComp = vetComp.filter(item => item !== opComp);
+  vetCont--;
+}
+
+function visibilizarComparar(btnNum){
+  btnComparar.forEach((item) => {
+    if(item.id == btnNum){
+      item.style.display = "block";
+    }
+  })
+}
+
+
 
 
 //Coloca a opcao certz pra saber qual card fazer depois colocar no container
@@ -151,6 +213,10 @@ function mostrarAlert(){
 }
 
 function limparVet(){
+  vetComp.forEach((item) =>{
+    tirarDesistir(item);
+    visibilizarComparar(item);
+  });
   vetCont = 0;
   vetComp = [];
   copiaCont = 0;
@@ -227,7 +293,7 @@ function fazerCardComparacao(resourceData) {
   title.href = resourceData.link;
 
   const preco = card.querySelector("#preco");
-  preco.innerText = resourceData.preco;
+  preco.innerText = `R$` + resourceData.preco;
 
   const description = card.querySelector("#description");
   description.innerText = resourceData.description;

@@ -1,23 +1,55 @@
-.testeIds{
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Poppins:wght@400;500;600;700&display=swap');
+
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+a {
+	text-decoration: none;
+}
+
+li {
+	list-style: none;
+}
+body{
+    font-family: var(--poppins);
+}
+
+:root {
+    --poppins: 'Poppins', sans-serif;
+    --lato: 'Lato', sans-serif;
+
+    --light: #F9F9F9;
+    --blue: #3C91E6;
+    --light-blue: #CFE8FF;
+    --grey: #eee;
+    --dark-grey: #AAAAAA;
+    --dark: #342E37;
+    --red: #DB504A;
+    --yellow: #FFCE26;
+    --light-yellow: #FFF2C6;
+    --orange: #FD7238;
+    --light-orange: #FFE0D3;
+}
+
+
+.testeIds {
     visibility: hidden;
 }
 
-.btnComparar{
-    color:pink;
-}
-
-body {
-    padding:0;
-    margin:0;
- }
-.btnContainer{
+.btnContainer {
     display: flex;
     justify-content: center;
-    padding: 1rem;
+    gap:3rem;
+    padding: 4rem;
+    /* background-color: blue; */
 }
-.btnFilter{
+
+.btnFilter {
     margin-left: 1rem;
-    margin-right: 1rem; 
+    margin-right: 1rem;
     border-radius: 9999px;
     padding-top: 0.25rem;
     padding-bottom: 0.25rem;
@@ -27,41 +59,223 @@ body {
     outline: 2px solid transparent;
 }
 
-.itensContainer{
-    display:flex;
-    align-content: center;
-    justify-content: space-around;
-    padding-left: 0.5rem;
-    padding-right: 0.5rem;
+.itensContainer {
+    display: grid;
+    grid-template-columns: repeat(3, 4fr);
+    padding-left: 20%;
+    padding-right: 20%;
     padding-top: 1.25rem;
     padding-bottom: 1.25rem;
-    margin-left: auto;
-    margin-right: auto;
+    /* background-color: pink; */
 }
 
-#resource{
-    display:flex;
-    flex-direction: column;
-    text-align: center;
-    border-radius: 0.5rem;
-    width: 16rem;
-    margin: 1rem;
-    overflow: hidden;
-}
 
-#compararContainer{
-    display:none;
-    align-content: center;
-    justify-content: space-around;
-    padding-left: 0.5rem;
-    padding-right: 0.5rem;
-    padding-top: 1.25rem;
-    padding-bottom: 1.25rem;
-    margin-left: auto;
-    margin-right: auto;
-}
 
-.alert-box-container{
+#compararContainer {
     display: none;
+    align-content: center;
+    justify-content: space-around;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+    padding-top: 1.25rem;
+    padding-bottom: 1.25rem;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.alert-box-container {
+    display: none;
+
+}
+/*BOTAO DAS OPCOES*/
+/*
+<!-- HTML !-->
+<button class="button-28" role="button">Button 28</button>
+*/
+/* CSS */
+.button-28 {
+  appearance: none;
+  background-color: transparent;
+  border: 2px solid #1A1A1A;
+  border-radius: 15px;
+  box-sizing: border-box;
+  color: #3B3B3B;
+  cursor: pointer;
+  display: inline-block;
+  font-family: Roobert,-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
+  font-size: 16px;
+  font-weight: 600;
+  line-height: normal;
+  margin: 0;
+  min-height: 60px;
+  min-width: 0;
+  outline: none;
+  padding: 16px 24px;
+  text-align: center;
+  text-decoration: none;
+  transition: all 300ms cubic-bezier(.23, 1, 0.32, 1);
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  width: 100%;
+  will-change: transform;
+}
+
+.button-28:disabled {
+  pointer-events: none;
+}
+
+.button-28:hover {
+  color: #fff;
+  background-color: #1A1A1A;
+  box-shadow: rgba(0, 0, 0, 0.25) 0 8px 15px;
+  transform: translateY(-2px);
+}
+
+.button-28:active {
+  box-shadow: none;
+  transform: translateY(0);
+}
+
+.btnFilter.active {
+    background-color: #1A1A1A;
+    color: #fff;
+}
+
+/*BOTAO DO CARDS COMPARAR*/
+.button-95 {
+    appearance: none;
+    background-color: transparent;
+    border: 2px solid #1A1A1A;
+    border-radius: 15px;
+    box-sizing: border-box;
+    color: #3B3B3B;
+    cursor: pointer;
+    display: inline-block;
+    font-family: Roobert,-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
+    font-size: 16px;
+    font-weight: 600;
+    line-height: normal;
+    margin: 0;
+    min-height: 60px;
+    min-width: 0;
+    outline: none;
+    padding: 16px 24px;
+    text-align: center;
+    text-decoration: none;
+    transition: all 300ms cubic-bezier(.23, 1, 0.32, 1);
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    width: 100%;
+    will-change: transform;
+  }
+  
+  .button-95:disabled {
+    pointer-events: none;
+  }
+  
+  .button-95:hover {
+    color: #fff;
+    background-color: #1A1A1A;
+    box-shadow: rgba(0, 0, 0, 0.25) 0 8px 15px;
+    transform: translateY(-2px);
+  }
+  
+  .button-95:active {
+    box-shadow: none;
+    color: #fff;
+    background-color: #1A1A1A;
+    transform: translateY(0);
+  }
+/*BOTAO DE COMPARAR E RECOMECAR*/
+/*
+<!-- HTML !-->
+<button class="button-87" role="button">Button 87</button>
+*/
+/* CSS */
+.button-87 {
+  margin: 10px;
+  padding: 15px 30px;
+  text-align: center;
+  text-transform: uppercase;
+  transition: 0.5s;
+  background-size: 200% auto;
+  color: white;
+  border-radius: 10px;
+  display: block;
+  border: 0px;
+  font-weight: 700;
+  box-shadow: 0px 0px 14px -7px #f09819;
+  background-image: linear-gradient(45deg, #FF512F 0%, #F09819  51%, #FF512F  100%);
+  cursor: pointer;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+.button-87:hover {
+  background-position: right center;
+  /* change the direction of the change here */
+  color: #fff;
+  text-decoration: none;
+}
+
+.button-87:active {
+  transform: scale(0.95);
+}
+
+
+/* Template Container */
+#resource {
     
+        
+        min-height: 400px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        
+        max-width: 500px;
+        height: 300px;
+        padding: 35px;
+      
+        border: 1px solid rgba(255, 255, 255, .25);
+        border-radius: 20px;
+        background-color: rgba(255, 255, 255, 0.45);
+        box-shadow: 0 0 10px 1px rgba(0, 0, 0, 0.25);
+      
+        backdrop-filter: blur(15px);
+      
+        margin: 1rem;
+        width: 16rem;
+        text-align: center;
+        overflow: hidden;
+}
+
+#imagem{
+    border-radius: .5rem;
+    max-width: 100%;
+    height: 250px;
+    object-fit: cover;
+}
+
+#title{
+    color:rgb(71, 67, 67);
+}
+
+.btnComparar {
+    margin-top: 20px;
+}
+
+.btnDesistir{
+    background-color: #442828;
+    color: white;
+    margin-top: 20px;
+    display:none;
+}
+
+
+#compararBotoes{
+    display: flex;
+    justify-content: center;
 }
