@@ -79,6 +79,9 @@ function copyTemplateCard(resourceData) {
   const description = card.querySelector("#description");
   description.innerText = resourceData.description;
 
+  const btnComparar = card.querySelector(".btnComparar");
+  btnComparar.id = resourceData.numId;
+  btnComparar.addEventListener("click", encherCompararContainer);
 
   return card;
 }
@@ -92,21 +95,40 @@ const compararContainer = document.querySelector("#compararContainer");
 const btnComparar = document.querySelectorAll(".btnComparar");
 const btnCompararPrincipal = document.querySelector("#btnCompararPrincipal");
 
+const alertBoxContainer = document.querySelector("#alertBoxContainer");
+
 let opComp = -1;
 let opcoesComparar = [];
+
 let vetCont = 0;
-let cardCont = 0;
 let vetComp = [];
+
+let mostrando = false;
+
+let copiaDados = [];
+let opcoesComparar2 = [];
+
+let copiaCont = 0;
+let copiaVet = [];
 
 //Botao de comparar
 function encherCompararContainer(e) { 
   this.style.color = "red";
   opComp = this.id;
   console.log(opComp);
-  vetComp[vetCont++] = opComp;
-  escolherOpcoes(opComp);
+  if(vetCont < 3)
+  {
+    vetComp[vetCont++] = opComp;
+  }else
+  {
+    mostrarAlert();
+  }
 }
 
+
+//Coloca a opcao certz pra saber qual card fazer depois colocar no container
+//Numero do id do botao ta sendo igual o numero numId
+// que coloco o id quando faco o card de cima
 function escolherOpcoes(opComp) {
 opcoesComparar = dataResources.filter( resourceData => {
     if (resourceData.numId == opComp ) {
@@ -118,12 +140,77 @@ opcoesComparar = dataResources.filter( resourceData => {
 
 escolherOpcoes(opComp);
 
-function testarNumeros(){
-  const pTeste = document.querySelector("#testeCompararIds");
-  pTeste.innerText = vetComp;
-  console.log(vetComp);
-  pTeste.style.visibility = "visible";
-  compararContainer.style.display = "flex";
+function mostrarAlert(){
+
+  alertBoxContainer.style.display = "block";
+
+  const btnConfirma = document.querySelector("#btnConfirma");
+  btnConfirma.addEventListener('click', function (){
+    alertBoxContainer.style.display = "none";
+  });
+}
+
+function limparVet(){
+  vetCont = 0;
+  vetComp = [];
+  copiaCont = 0;
+  copiaVet = [];
+  copiaDados = [];
+}
+
+
+function copiarVet(opComp){
+  opcoesComparar2 = dataResources.filter( resourceData => {
+    if (resourceData.numId == opComp ) {
+      copiaDados.push({
+        numId: resourceData.numId,
+        preco: resourceData.preco
+      });
+    } 
+  })
+}
+
+function ordenarVetor(){
+  copiaDados.sort((a, b) => a.preco - b.preco);
+  copiaDados.forEach((item) =>{
+    copiaVet[copiaCont++] = item.numId;
+  });
+}
+
+function mostrarCards()
+{
+
+  if(vetCont < 2)
+  {
+    alert("Precisa de mais de um item escolhido para fazer a comparação.");
+  }else if (mostrando == true)
+  {
+    alert("Já esta comparando itens, favor começar denovo e escolher novamente.");
+  }else
+  {
+    const pTeste = document.querySelector("#testeCompararIds");
+    pTeste.innerText = vetComp;
+
+    vetComp.forEach( (opComp) =>
+    {
+      copiarVet(opComp);
+    });
+    ordenarVetor();   
+    copiaVet.forEach( (opComp) =>
+    {
+      escolherOpcoes(opComp);
+    });
+
+    pTeste.style.visibility = "visible";
+    compararContainer.style.display = "flex";
+    mostrando = true;
+  }
+
+}
+function resetarComp(){
+   clearContainer(compararContainer);
+   limparVet();
+   mostrando = false;
 }
 
 function fazerCardComparacao(resourceData) {
@@ -145,19 +232,8 @@ function fazerCardComparacao(resourceData) {
   const description = card.querySelector("#description");
   description.innerText = resourceData.description;
   
+  const btnComparar = card.querySelector(".btnComparar");
+  btnComparar.style.display = "none";
+
   return card;
-}
-
-let idCont = 0;
-
-btnComparar.forEach(function(btn) {
-  btn.style.color = "blue";
-  btn.id = idCont++;
-  btn.addEventListener("click", encherCompararContainer);
-});
-
-
-function compararProdutos(){
-  compararContainer.style.display = "block";
-  clearContainer(compararContainer);
 }
