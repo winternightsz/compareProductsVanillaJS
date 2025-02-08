@@ -59,15 +59,7 @@ body{
     outline: 2px solid transparent;
 }
 
-.itensContainer {
-    display: grid;
-    grid-template-columns: repeat(3, 4fr);
-    padding-left: 20%;
-    padding-right: 20%;
-    padding-top: 1.25rem;
-    padding-bottom: 1.25rem;
-    /* background-color: pink; */
-}
+
 
 
 
@@ -81,12 +73,10 @@ body{
     padding-bottom: 1.25rem;
     margin-left: auto;
     margin-right: auto;
+    margin-top: 6%;
 }
 
-.alert-box-container {
-    display: none;
 
-}
 /*BOTAO DAS OPCOES*/
 /*
 <!-- HTML !-->
@@ -211,7 +201,7 @@ body{
   cursor: pointer;
   user-select: none;
   -webkit-user-select: none;
-  touch-action: manipulation;
+  touch-action: manipulation; 
 }
 
 .button-87:hover {
@@ -225,18 +215,26 @@ body{
   transform: scale(0.95);
 }
 
+.itensContainer {
+  display: grid;
+  grid-template-columns: repeat(3, 4fr);
+  padding-top: 1.25rem;
+  padding-bottom: 1.25rem;
+  /* background-color: pink; */
+}
+
 
 /* Template Container */
 #resource {
     
         
-        min-height: 400px;
+        min-height: 100px;
         display: flex;
         flex-direction: column;
         justify-content: space-between;
         
         max-width: 500px;
-        height: 300px;
+        
         padding: 35px;
       
         border: 1px solid rgba(255, 255, 255, .25);
@@ -279,3 +277,69 @@ body{
     display: flex;
     justify-content: center;
 }
+
+.alert-box-container {
+  display: none;
+
+}
+
+/* Open Modal Container/Wrapper Full-screen */
+#alertBoxContainer {
+  background-color: rgba(0, 0, 0, 0.3);
+  /* Center modal container */
+  align-self: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  opacity: 0; /* to be hidden by default */
+  pointer-events: none; /* so we can click the modal trigger */
+  top: 0;
+  left: 0;
+  height: 100vh; /* =100% of viewport height */
+  width: 100vw; /* = 100% of viewport width */
+  transition: opacity 0.3s ease;
+}
+
+/* Activate the class that we used in JS for the Event Listeners of modal's open and close button */
+#alertBoxContainer.show {
+  pointer-events: auto; /* set back the default value */
+  opacity: 1;
+}
+
+.alert-content {
+  background-color: #fff;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* box shadow to add depth */
+  padding: 30px 50px;
+  width: 600px;
+  max-width: 100%; /* Assures that it' ll be kept inside the browser width */
+  text-align: center;
+}
+
+.alert-content h2 {
+  margin: 0;
+}
+
+.alert-content p {
+  font-size: 14px;
+  opacity: 0.7;
+}
+
+#containerMaior{
+  /* background-color: #3C91E6; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#ladoDireitoContainer{
+  position: absolute;
+  margin-left:45%;
+}
+
+#containerDentro{
+  /* background-color: #F09819; */
+  display: flex;
+}
+

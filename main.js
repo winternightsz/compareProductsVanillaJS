@@ -2,8 +2,6 @@ const resources = document.querySelector("#resourcesContainer");
 const template = document.querySelector("template");
 const btnFilter = document.querySelectorAll(".btnFilter");
 
-
-
 let category = 'all';
 let filteredDataResources = [];
 
@@ -51,25 +49,25 @@ btnFilter.forEach(item => {
       item.classList.add('active');
   })
 });
+
 //Encher a variavel de qual filtro clicou
 //e chamar pra atualizar os cards dependendo do filtro
 function fillResourcesContainer() {
   category = this.id;
   clearContainer(resources);
-  filterResources(category)
+  filterResources(category);
 }
-
 
 function clearContainer(container) {
   container.innerHTML = "";
 }
 
-//
 function filterResources(category) {
   filteredDataResources = dataResources.filter( resourceData => {
     if (resourceData.tags.includes(category)) {
        const resourceCard = copyTemplateCard(resourceData);
        resources.appendChild(resourceCard);
+       
     } 
   })
 }
@@ -83,7 +81,7 @@ function copyTemplateCard(resourceData) {
   const resourceTemplate = document.importNode(template.content, true);
 
   const card = resourceTemplate.querySelector("#resource");
-  
+  card.style.height = `400px`;
   const imagem = card.querySelector("#imagem");
   imagem.src = resourceData.imagem;
 
@@ -96,7 +94,7 @@ function copyTemplateCard(resourceData) {
 
   const description = card.querySelector("#description");
   description.innerText = resourceData.description;
-
+ 
   const btnComparar = card.querySelector(".btnComparar");
   btnComparar.id = resourceData.numId;
   btnComparar.addEventListener("click", encherCompararContainer);
@@ -108,6 +106,7 @@ function copyTemplateCard(resourceData) {
   return card;
 }
 
+//Chamando isso somente quando renderiza a primeira vez
 //EventListener pra se o usuario escolheu algum filtro
 btnFilter.forEach(function(btn) {
     btn.addEventListener("click", fillResourcesContainer);
@@ -119,6 +118,7 @@ const btnDesistir = document.querySelectorAll(".btnDesistir");
 const btnCompararPrincipal = document.querySelector("#btnCompararPrincipal");
 
 const alertBoxContainer = document.querySelector("#alertBoxContainer");
+const ladoDireitoContainer = document.querySelector("#ladoDireitoContainer");
 
 let opComp = -1;
 let opcoesComparar = [];
@@ -134,35 +134,43 @@ let opcoesComparar2 = [];
 let copiaCont = 0;
 let copiaVet = [];
 
-
-
-
 //Botao de comparar
 function encherCompararContainer(e) { 
   this.style.color = "red";
   opComp = this.id;
-  this.style.display = "none";
-  visibilizarDesistir(opComp);
   console.log(opComp);
   if(vetCont < 3)
   {
+    this.style.display = "none";
     vetComp[vetCont++] = opComp;
+    visibilizarDesistir(opComp);
   }else
   {
     mostrarAlert();
   }
 }
 
-function visibilizarDesistir(btnNum){
-  btnDesistir.forEach((item) => {
-    if(item.id == btnNum){
-      item.style.display = "block";
+function mostrarDesistirSeSelecionado(btnNum){
+  vetComp.forEach((item)=>{
+    if (item == btnNum){
+      visibilizarDesistir(btnNum);
     }
-  })
+  });
 }
 
+function visibilizarDesistir(btnNum){
+  mostrarVet();
+  document.querySelectorAll(".btnDesistir").forEach((item) => {
+    if (item.id == btnNum){
+      console.log("Ativando botão Desistir");
+      item.style.display = "block";
+    }
+  });
+}
+
+
 function tirarDesistir(btnNum){
-  btnDesistir.forEach((item) => {
+  document.querySelectorAll(".btnDesistir").forEach((item) => {
     if(item.id == btnNum){
       item.style.display = "none";
     }
@@ -170,21 +178,24 @@ function tirarDesistir(btnNum){
 }
 
 function desistirDoItem(e){
-  this.style.display = "none";
+  //this.style.display = "none";
   opComp = this.id;
   visibilizarComparar(opComp);
   vetComp = vetComp.filter(item => item !== opComp);
   vetCont--;
+  clearContainer(ladoDireitoContainer);
+  mostrarVet();
 }
 
 function visibilizarComparar(btnNum){
-  btnComparar.forEach((item) => {
-    if(item.id == btnNum){
+  mostrarVet();
+  document.querySelectorAll(".btnComparar").forEach((item) => {
+    if (item.id == btnNum){
+      console.log("Ativando botão Comparar");
       item.style.display = "block";
     }
-  })
+  });
 }
-
 
 
 
@@ -203,9 +214,9 @@ opcoesComparar = dataResources.filter( resourceData => {
 escolherOpcoes(opComp);
 
 function mostrarAlert(){
-
+  const modal_container = document.getElementById("alertBoxContainer");
   alertBoxContainer.style.display = "block";
-
+  modal_container.classList.add("show");
   const btnConfirma = document.querySelector("#btnConfirma");
   btnConfirma.addEventListener('click', function (){
     alertBoxContainer.style.display = "none";
@@ -252,6 +263,7 @@ function mostrarCards()
   }else if (mostrando == true)
   {
     alert("Já esta comparando itens, favor começar denovo e escolher novamente.");
+    location.href='index.html#compararContainer'
   }else
   {
     const pTeste = document.querySelector("#testeCompararIds");
@@ -266,7 +278,7 @@ function mostrarCards()
     {
       escolherOpcoes(opComp);
     });
-
+    location.href='index.html#compararContainer'
     pTeste.style.visibility = "visible";
     compararContainer.style.display = "flex";
     mostrando = true;
@@ -274,9 +286,10 @@ function mostrarCards()
 
 }
 function resetarComp(){
-   clearContainer(compararContainer);
+   clearContainer(compararContainer);    
    limparVet();
    mostrando = false;
+   clearContainer(ladoDireitoContainer); 
 }
 
 function fazerCardComparacao(resourceData) {
@@ -297,6 +310,49 @@ function fazerCardComparacao(resourceData) {
 
   const description = card.querySelector("#description");
   description.innerText = resourceData.description;
+  
+  const btnComparar = card.querySelector(".btnComparar");
+  btnComparar.style.display = "none";
+
+  return card;
+}
+
+
+function mostrarVet(){
+  clearContainer(ladoDireitoContainer);
+  vetComp.forEach( (opComp) =>
+    {
+      opcoesVetor(opComp);
+    });
+}
+
+function opcoesVetor(opComp) {
+  opcoesComparar = dataResources.filter( resourceData => {
+      if (resourceData.numId == opComp ) {
+         const comparacaoCard = fazerCardVetor(resourceData);
+         ladoDireitoContainer.appendChild(comparacaoCard);
+      } 
+    })
+  }
+
+function fazerCardVetor(resourceData) {
+
+  const resourceTemplate = document.importNode(template.content, true);
+
+  const card = resourceTemplate.querySelector("#resource");
+  card.style.height = `200px`;
+  const imagem = card.querySelector("#imagem");
+  imagem.src = resourceData.imagem;
+
+  const title = card.querySelector("#title");
+  title.innerText = resourceData.title;
+  title.href = resourceData.link;
+
+  const preco = card.querySelector("#preco");
+  preco.innerText = `R$` + resourceData.preco;
+
+  const description = card.querySelector("#description");
+  description.style.display = "none";
   
   const btnComparar = card.querySelector(".btnComparar");
   btnComparar.style.display = "none";
