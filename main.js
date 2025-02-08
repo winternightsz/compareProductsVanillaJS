@@ -266,8 +266,8 @@ function mostrarCards()
     location.href='index.html#compararContainer'
   }else
   {
-    const pTeste = document.querySelector("#testeCompararIds");
-    pTeste.innerText = vetComp;
+    // const pTeste = document.querySelector("#testeCompararIds");
+    // pTeste.innerText = vetComp;
 
     vetComp.forEach( (opComp) =>
     {
@@ -279,7 +279,7 @@ function mostrarCards()
       escolherOpcoes(opComp);
     });
     location.href='index.html#compararContainer'
-    pTeste.style.visibility = "visible";
+    // pTeste.style.visibility = "visible";
     compararContainer.style.display = "flex";
     mostrando = true;
   }
